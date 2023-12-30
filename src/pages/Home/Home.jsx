@@ -4,6 +4,8 @@ import { CiEdit } from "react-icons/ci";
 import { MdDeleteSweep } from "react-icons/md";
 import { useEffect, useReducer, useState } from "react";
 import axios from "axios";
+import Swal from "sweetalert2";
+import { toast } from "react-toastify";
 
 
 const Home = () => {
@@ -62,6 +64,7 @@ const handleInputChange= (e) => {
 //submit form
 const handleSubmit = async(e) => {
   e.preventDefault()
+
 const create_todos_data = await axios.post("http://localhost:5050/todos", input)
 dispach({type:"CREATE", payload: create_todos_data.data});
 getAllTodos();
@@ -69,13 +72,34 @@ setInput({
   name :"",
   type: ""
 })
+toast.success("Todo add successfully done") 
+
+
 };
 
 const handleDeleteTodos = async(id) => {
-  const delete_respons = await axios.delete(`http://localhost:5050/todos/${id}`)
 
-  dispach({type: "DELETE", payload:delete_respons })
-  getAllTodos()
+  Swal.fire({
+    title: "Are you sure?",
+    text: "You won't be able to revert this!",
+    icon: "warning",
+    showCancelButton: true,
+    confirmButtonColor: "#3085d6",
+    cancelButtonColor: "#d33",
+    confirmButtonText: "Yes, delete it!"
+  }).then((result) => {
+    if (result.isConfirmed) {
+      const delete_respons = axios.delete(`http://localhost:5050/todos/${id}`)
+      dispach({type: "DELETE", payload:delete_respons })
+      getAllTodos()
+      Swal.fire({
+        title: "Deleted!",
+        text: "Your file has been deleted.",
+        icon: "success"
+      });
+    }
+  });
+ 
 }
 
 
@@ -125,6 +149,7 @@ const editSubmitTodo = async(e) => {
  dispach({type:"EDIT", payload: getEditTodos})
  getAllTodos();
  setModal(false)
+ toast.success("Todo Edit successfully done") 
 }
 
 
