@@ -1,0 +1,24 @@
+{
+  "todos": [
+    {
+      "name": "go to office",
+      "type": "pending",
+      "id": 1
+    },
+    {
+      "name": "start my ",
+      "type": "success",
+      "id": 2
+    },
+    {
+      "name": "complete my file",
+      "type": "runing",
+      "id": 3
+    },
+    {
+      "name": "meeting with",
+      "type": "success",
+      "id": 4
+    }
+  ]
+}

@@ -1,0 +1,22 @@
+.todo_area{
+    background-color: cadetblue;
+    padding: 20px;
+    height:100vh;
+    .todo-top{
+        display: flex;
+        column-gap: 10px;
+
+        input{
+            width:50%;
+        }
+        
+    }
+    .todo-list{
+        margin-top: 20px;
+        .list{
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 5px;
+        }
+    }
+}
